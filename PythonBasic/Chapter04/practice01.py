@@ -4,9 +4,6 @@ lst = [10,1,5,2]
 result1 = lst * 2
 print(f"단계1 : {result1}")
 
-#result2 = (lst * 2)
-#result2.append(20)
-#print(f"단계2 : {result2}")
 first = result1[0] * 2
 #print(first)
 result1.append(first)

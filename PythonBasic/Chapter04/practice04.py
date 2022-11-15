@@ -1,13 +1,17 @@
 #4
 a = [1,1,1,2,2,3,3,3,4,4,5]
-aResult = []
 
-for result in a:
-    if result not in aResult:
-        aResult.append(result)
+a1 = set(a)
+a2 = list(a1)
+print(a2)
 
-print(aResult)
+#aResult = []
 
+#for result in a:
+#    if result not in aResult:
+#        aResult.append(result)
+
+#print(aResult)
 
 #5
 shop = {'kim99':12000,
@@ -17,26 +21,26 @@ shop = {'kim99':12000,
         'hwang33':18000}
 num = 1
 
-for k in shop:
-    print(f"{num}. 아이디 : {k} 마일리지 : {shop[k]}점")
+for key in shop:
+    print(f"{num}. 아이디 : {key}, 마일리지 : {shop[key]}점")
     num += 1
 
 
 #6
-TARKET_ID = 'han55'
-shop[TARKET_ID] = 5000
+findId = 'han55'
+shop[findId] = 5000
 
 for id in shop:
-    if TARKET_ID == id:
-        print(f"{TARKET_ID}님의 마일리지가 {shop[TARKET_ID]}점으로 수정되었습니다.")
+    if findId == id:
+        print(f"{findId}님의 마일리지가 {shop[findId]}점으로 수정되었습니다.")
 
 #7
-TARKET_ID = 'jang88'
-shop[TARKET_ID] = 7000
+findId = 'jang88'
+shop[findId] = 7000
 
 print()
 print(f"전체 딕셔너리 : {shop}")
-print(f"{TARKET_ID}님의 마일리지({shop[TARKET_ID]}점)가 추가되었습니다.")
+print(f"{findId}님의 마일리지({shop[findId]}점)가 추가되었습니다.")
 
 print()
 #8
@@ -49,7 +53,7 @@ for id in shop:
 
 for id in shop:
     if shop[id] == result:
-        max_id = id
+        maxId = id
 
-print(f"{max_id}님의 {result}점이 가장 높은 점수 입니다.")
+print(f"{maxId}님의 {result}점이 가장 높은 점수 입니다.")
 

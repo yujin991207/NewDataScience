@@ -18,7 +18,8 @@ print(person)
 print(person['age'])
 print('age' in person)
 
-for key in person.keys():
+#for key in person.keys():
+for key in person:
     print(key)
 
 for v in person.values():
