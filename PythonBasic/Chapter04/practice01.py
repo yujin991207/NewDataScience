@@ -12,8 +12,18 @@ print(f"단계2 : {result1}")
 result3 = result1[1::2]
 print(f"단계3 : {result3}")
 
-
-
 #2
-vector = int(input("리스트를 입력하세요 : "))
+vector = int(input("vector의 수 : "))
+lst = []
+
+for i in range(vector):
+    lst.append(i)
+    print(i)
+
+print(f'vector 크기 : {len(lst)}')
+
 #3
+if i in lst:
+    print('yes')
+else:
+    print('no')
