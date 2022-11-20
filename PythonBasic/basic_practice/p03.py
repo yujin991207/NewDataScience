@@ -8,9 +8,9 @@ def num_allAdd(nums):
     for num in nums:
         #print(num)
         sum += int(num) # str이니깐 변환
+    print(sum)
+        #return sum
 
-        return sum
-
-
-result = num_allAdd(nums)
-print(result)
+num_allAdd(nums)
+#result = num_allAdd(nums)
+#print(result)
