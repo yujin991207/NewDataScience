@@ -1,26 +1,15 @@
-# 교과서 4번
-tot=0
-print("수열 = ",end = ' ')
+while True:
+    age=int(input('나이를 입력하세요 : '))
 
-for i in range(1,101):
-    if i%3 == 0 and i%2 != 0:
-        print(f"i = {i} ",end = ' ')
-        tot += i
-
-print(f'누적합 = {tot}')
-
-#======================================
-
-# 교과서 5번
-multiline="""안녕하세요. 파이썬 세계로 오신걸
-환영합니다.
-파이썬은 비단뱀처럼 매력적인 언어입니다."""
-
-cnt = 0
-word = []
-sents = []
-
-for sen in multiline.split(sep = "\n"):
-    sents.append(sen)
-
-print(sents)
+    if 19 <= age <= 65:
+            price = 5000
+    elif 14 <= age <= 18:
+        price = 3000
+    elif 4 <= age <= 13:
+        price = 2000
+    else:
+        price = 0
+    if price != 0:
+        print(f'요금은 {price}원 입니다')
+    else:
+        print(f'요금은 무료입니다')

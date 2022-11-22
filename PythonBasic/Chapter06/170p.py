@@ -29,6 +29,8 @@ paper = paperAirplane() # 자식3클래스 객체
 
 flight.fly()
 
+# 상황에 따라서 flight.fly()함수호출이 달라진다
+# air할당
 flight = air
 flight.fly()
 

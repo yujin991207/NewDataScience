@@ -44,24 +44,30 @@ while True:
             base = int(input('기본급 : '))
             bonus = int(input('상여금 : '))
 
-            p = Permanent(name,base,bonus)
+            p = Permanent(name,base,bonus) # 정규직(자식)클래스 호출
 
+            print()
             print('=' * 30)
             print('고용형태 : 정규직')
             print(f'이름 : {p.name}')
-            print(f'급여 : '+format(p.pay,'3,d'))
+            print(f'급여 : ' + format(p.pay,'3,d') + '만원')
+            print('=' * 30)
+            print()
 
     elif empType == 't':
             name = input('이름 : ')
             time = int(input('작업시간 : '))
             tpay = int(input('시급 : '))
 
-            t = Temporary(name,time,tpay)
+            t = Temporary(name,time,tpay) # 임시직(자식)클래스 호출
 
+            print()
             print('=' * 30)
             print('고용형태 : 임시직')
             print(f'이름 : {t.name}')
-            print(f'급여 : ' + format(t.pay, '3,d'))
+            print(f'급여 : ' + format(t.pay, '3,d') + '원')
+            print('=' * 30)
+            print()
 
     else:
             print('=' * 30)

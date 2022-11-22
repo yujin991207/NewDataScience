@@ -1,10 +1,10 @@
 #5 입력 문자열을 한 줄에 다섯글자씩 출력하는 print_5xn(string) 함수를 작성하라.
-def print_5xn(String):
-        for s in range(0,len(String),5):
-            print(String[s:s+5])
+def print_5xn(string):
+        for s in range(0,len(string),5): # 0부터 string의 길이만큼 5개씩
+            print(string[s:s+5])
 
-String = input('문자를 입력하세요 : ')
-print_5xn(String)
+string = input('문자를 입력하세요 : ')
+print_5xn(string)
 
 
 #6 연봉을 입력받아 월급을 계산하는 calc_monthly_salary(annual_salary) 함수를 정의하라.

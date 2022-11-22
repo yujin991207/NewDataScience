@@ -7,20 +7,20 @@ temperature = {'월':25.5,
                '토':35.3,
                '일':33.3}
 
-LINE_NUM = 54
-print('-' * LINE_NUM)
+#LINE_NUM = 54
+print('-' * 54)
 
 for day in temperature:
     print(f'  {day}\t', end='')
 
 print()
-print('-' * LINE_NUM)
+print('-' * 54)
 
 for day in temperature:
     print(f' {temperature[day]}\t', end='')
 
 print()
-print('-' * LINE_NUM)
+print('-' * 54)
 
 #10
 temperature_list = []
@@ -37,9 +37,9 @@ result = []
 for day in temperature:
     if temperature[day] >= 30:
         result.append(day)
-print("기온이 30℃ 이상인 요일 : ",end='')
+print(f"기온이 30℃ 이상인 요일 : ",end='')
 
-print(",".join(result))
+print(",".join(result)) # 리스트형태로 [,] 나오기때문에 join을 써준다
 
 #12
 sum = 0

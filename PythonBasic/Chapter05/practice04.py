@@ -12,17 +12,17 @@ def input_ingredient():
     while True:
         ingredient = input('안녕하세요 원하시는 재료를 입력하세요 (종료 =>"엔터") : ')
 
-        if ingredient == '':
+        if ingredient == '': # 엔터시 종료
             print()
             return ingredient_list
 
         else:
-            ingredient_list.append(ingredient)
+            ingredient_list.append(ingredient) # 종료시 내가 입력했던 재료를 list에 추가
 
 def make_sandwiches(ingredient_list):
         print('샌드위치를 만들겠습니다')
 
-        for list in ingredient_list:
+        for list in ingredient_list: # 내가 입력한 리스트를 다 입력할 때까지 for문 돌기
             print(f'{list}를 추가합니다')
 
         print('\n여기 주문하신 샌드위치 만들었습니다 맛있게 드세요\n')

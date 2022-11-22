@@ -1,6 +1,6 @@
 #방법1. 모듈추가
 import PythonBasic.Chapter06.myPackage.scaterring
-data = [1 , 3 , 1.5 , 2 , 1 , 3.2]
+data = [1, 3, 1.5, 2, 1, 3.2]
 
 #scaterring.py => 산술평균 함수 호출
 print(f'평균 : {PythonBasic.Chapter06.myPackage.scaterring.Avg(data)}')

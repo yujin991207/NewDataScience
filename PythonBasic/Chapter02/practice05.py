@@ -1,7 +1,4 @@
-String="a:b:c:d"
+#6
+str_list = ['우리','끝까지','힘내요!']
 
-print(String)
-
-String2=String.replace(':','#')
-
-print(String2)
+print(f"\"{' '.join(str_list)}\"")
