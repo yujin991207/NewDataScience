@@ -39,7 +39,7 @@ class Restaurant:
     # 소멸자
     def __del__(self):
         print(f'{self.restaurant_name} 레스토랑 문닫습니다.')
-        with open("file/고객서빙현황로그.txt",mode = 'a',encoding = 'utf-8') as customer_f:
+        with open("file/고객서빙현황로그.txt", mode ='a', encoding ='utf-8') as customer_f:
             customer_f.write("%d\t %d\n" %(self.today_customer,self.number_served))
 
 

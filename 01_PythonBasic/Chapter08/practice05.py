@@ -1,6 +1,6 @@
 #5
 candidate_list = []
-file = open("data/연습생.txt",mode='r',encoding='utf-8')
+file = open("data/연습생.txt", mode='r', encoding='utf-8')
 
 names = file.readlines()
 #print(names)

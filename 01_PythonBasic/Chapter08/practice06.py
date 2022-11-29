@@ -1,6 +1,6 @@
 6
 def serach_visitor(name):
-   with open("data/방명록.txt",mode = 'r',encoding = 'utf-8') as file:
+   with open("data/방명록.txt", mode ='r', encoding ='utf-8') as file:
        visitor = file.read()
 
        if visitor.find(name) == -1: # 찾는 이름과 입력한 값의 이름이 같은지 여부 체크
@@ -16,7 +16,7 @@ if visitor_name:
 
 else:
     birth = int(input('생년월일을 입력하세요 (예 : 801212) : '))
-    with open("data/방명록.txt",mode='a',encoding = 'utf-8') as file:
+    with open("data/방명록.txt", mode='a', encoding ='utf-8') as file:
         file.write(f'\n{name} {birth}')
     print(f'{name}님 환영합니다. 아래 내용을 입력하셨습니다')
     print(f'{name} {birth}')

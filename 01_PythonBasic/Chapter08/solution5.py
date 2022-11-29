@@ -10,7 +10,7 @@ def make_world_star(candidate_list):
         print(f'아이돌 {name} 월드스타 등극')
 
 candidates_list=[]
-with open('data/연습생.txt','r',encoding='UTF-8') as file:
+with open('data/연습생.txt', 'r', encoding='UTF-8') as file:
     names = file.readlines()
     for name in names:
         candidates_list.append(name.strip())

@@ -5,7 +5,7 @@ file = open("data/life.txt", mode='r')
     #replace = s.replace("java","python")
 string = file.read().replace("java","python")
 
-file = open("data/life.txt", mode = 'w')
+file = open("data/life.txt", mode ='w')
 file.write(string)
 
 #print(string)
