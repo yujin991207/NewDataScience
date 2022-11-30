@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/02_ETL/01_pandas_basic/data/2014_korea_sat_scores.csv" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/01_pandas_basic/data/2017_college_tuition.csv" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/01_pandas_basic/data/airplane_info.csv" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/01_pandas_basic/data/airport_code.csv" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/01_pandas_basic/data/flight_route_info.csv" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/01_pandas_basic/data/korea_movie_list.csv" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/01_pandas_basic/data/student_list.csv" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/02_ETL/01_pandas_basic/data/weight_loss.csv" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/01_pandas_basic/step6/example_lee.csv" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/01_pandas_basic/step6/sample.csv" charset="x-windows-949" />
   </component>
 </project>
