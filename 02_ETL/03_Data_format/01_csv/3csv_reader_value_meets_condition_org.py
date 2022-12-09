@@ -2,8 +2,8 @@
 import csv
 import datetime
 
-input_file = 'supplier_data2.csv'
-output_file = 'output_files/3output_basic_data2.csv'
+input_file = 'supplier_data.csv'
+output_file = 'output_files/3output_basic.csv'
 
 with open(input_file, 'r', newline='') as csv_in_file:
 	with open(output_file, 'w', newline='') as csv_out_file:
@@ -31,9 +31,9 @@ with open(input_file, 'r', newline='') as csv_in_file:
 
 			# 날짜 검색
 			#                                                  ['1','20','23']
-			date_raw =[ int(value) for value in row_list[4].split('-') ]
+			date_raw =[ int(value) for value in row_list[4].split('/') ]
 			#                     [1,20,23]
-			current_date = datetime.date(date_raw[0],date_raw[1],date_raw[2])
+			current_date = datetime.date(2000+date_raw[2],date_raw[0],date_raw[1])
 			start_date_condition = datetime.date(2023,1,30)
 			end_date_condition = datetime.date(2023, 2, 3)
 

@@ -2,7 +2,7 @@
 import pandas as pd
 import sys
 
-input_file = '../sales_2013.xlsx'
+input_file = 'sales_2013.xlsx'
 output_file = 'output_files/3output_pandas.xlsx'
 
 data_frame = pd.read_excel(input_file, sheet_name='january_2013')

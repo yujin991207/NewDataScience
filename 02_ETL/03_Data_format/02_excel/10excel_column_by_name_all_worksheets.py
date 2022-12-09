@@ -16,21 +16,27 @@ first_worksheet = True
 with open_workbook(input_file) as workbook:
 	data = [my_columns]
 	index_of_cols_to_keep = []
+
 	for worksheet in workbook.sheets():
 		if first_worksheet:
 			header = worksheet.row_values(0)
+
 			for column_index in range(len(header)):
 				if header[column_index] in my_columns:
 					index_of_cols_to_keep.append(column_index)
 			first_worksheet = False
+
 		for row_index in range(1, worksheet.nrows):
 			row_list = []
+
 			for column_index in index_of_cols_to_keep:	
 				cell_value = worksheet.cell_value(row_index, column_index)
 				cell_type = worksheet.cell_type(row_index, column_index)
+
 				if cell_type == 3:
 					date_cell = xldate_as_tuple(cell_value,workbook.datemode)
 					date_cell = date(*date_cell[0:3]).strftime('%m/%d/%Y')
+
 					row_list.append(date_cell)
 				else:
 					row_list.append(cell_value)
