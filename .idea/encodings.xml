@@ -11,7 +11,10 @@
     <file url="file://$PROJECT_DIR$/02_ETL/01_pandas_basic/data/weight_loss.csv" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/01_pandas_basic/step6/example_lee.csv" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/01_pandas_basic/step6/sample.csv" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/04_xml/12월13일_시도별_코로나백신_접종현황_v1.csv" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/04_xml/12월14일_코로나_예방접종현황_v1.csv" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/04_xml/COVID_info_parsing.py" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/04_xml/student_info_parsing.csv" charset="x-windows-949" />
-    <file url="PROJECT" charset="x-windows-949" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
