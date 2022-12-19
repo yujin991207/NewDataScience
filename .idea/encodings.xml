@@ -19,6 +19,15 @@
     <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/05_json/student_zero.json" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/05_json/student_zero2.csv" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/05_json/student_zero2.json" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/오라클_노트/05_oracle.txt" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/오라클_노트/06_문자날짜함수.txt" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/오라클_노트/07_그룹함수.txt" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/오라클_노트/08_groupby.txt" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/오라클_노트/09_join.txt" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/오라클_노트/10_inner_out_join.txt" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/오라클_노트/11_subQuery.txt" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/오라클_노트/12_f_k_check.txt" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/오라클_노트/오라클실습,sqlplus.txt" charset="x-windows-949" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
