@@ -11,14 +11,8 @@
     <file url="file://$PROJECT_DIR$/02_ETL/01_pandas_basic/data/weight_loss.csv" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/01_pandas_basic/step6/example_lee.csv" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/01_pandas_basic/step6/sample.csv" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/04_xml/12월13일_시도별_코로나백신_접종현황_v1.csv" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/04_xml/12월14일_코로나_예방접종현황_v1.csv" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/04_xml/COVID_info_parsing.py" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/04_xml/student_info_parsing.csv" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/05_json/student_zero.csv" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/05_json/student_zero.json" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/05_json/student_zero2.csv" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/05_json/student_zero2.json" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/1_기초_select.sql" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/2_select_연습문제.sql" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/오라클_노트/05_oracle.txt" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/오라클_노트/06_문자날짜함수.txt" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/오라클_노트/07_그룹함수.txt" charset="x-windows-949" />
@@ -28,6 +22,14 @@
     <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/오라클_노트/11_subQuery.txt" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/오라클_노트/12_f_k_check.txt" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/오라클_노트/오라클실습,sqlplus.txt" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/4_xml/12월13일_시도별_코로나백신_접종현황_v1.csv" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/4_xml/12월14일_코로나_예방접종현황_v1.csv" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/4_xml/COVID_info_parsing.py" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/4_xml/student_info_parsing.csv" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/5_json/student_zero.csv" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/5_json/student_zero.json" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/5_json/student_zero2.csv" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/5_json/student_zero2.json" charset="x-windows-949" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
