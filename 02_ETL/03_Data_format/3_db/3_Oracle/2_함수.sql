@@ -202,47 +202,274 @@ to_char(last_day(to_date('12','MM')), 'dd') as "12"
 from dual;
 
 -------------------------------------------------------------------
-select * from employees;
--- 직원테이블에서 ....... email (전체 소문자, 전체 대문자, 첫글자만 대문자)
-select lower(email), upper(email), initcap(email)
+-- 변환함수
+-- 암시적 형 변환
+-- number <-> character <-> date
+
+select first_name from employees
+where department_id = 40; -- <= 숫자타입
+
+select first_name from employees
+where department_id = '40'; -- <= 문자타입이지만 암시적 형변환이 일어난다
+
+select first_name from employees
+where hire_date = '03/06/17'; -- <= 문자타입이지만 암시적 형변환이 일어난다
+
+select '5500.00' - 4000 from dual;
+-- 하지만! 서식이 들어간 데이터는 암묵적 형 변환이 되지않는다.
+select '$5500.00' - 4000 from dual; -- 에러
+
+--select ltrim('$5500.00','$') - 4000 
+--from dual;
+select first_name from employees
+where hire_date = '03년 6월 17일'; -- 에러
+
+select first_name from employees
+where hire_date = '03/06/17';
+
+-- 명시적 형 변환
+-- TO_CHAR : 문자(날짜)열에 날짜포맷을 적용하여 문자로 변환, TO_CHAR([날짜],[날짜포맷])
+select first_name, to_char(hire_date,'MM/YY') as HiredMonth
+from employees
+where first_name = 'Steven';
+
+select first_name, to_char(hire_date,'YYYY"년" MM"월" DD"일"') as HiredMonth
+from employees
+where first_name = 'Steven';
+
+select first_name, to_char(hire_date,'YYYY-MM-DD') as HiredMonth
+from employees
+where first_name = 'Steven';
+
+-- TO_CHAR : 문자(숫자)열에 날짜포맷을 적용하여 문자로 변환, TO_CHAR([숫자],[숫자포맷])
+-- ex) $999,999 <- 숫자는 9로 표시
+-- 포맷보다 변환숫자의 길이가 큰 경우에는 '#'으로 표기된다.
+select to_char(2000000,'$999,999') salary from dual; -- '#' 출력
+select to_char(2000000,'$9999,999') salary from dual;
+
+-- 앞에 0으로 padding하고싶은경우 
+-- 목표 금액의 자리수를 고려하여 표현하고 싶은 경우
+select to_char(2000000,'$009,999,999') salary from dual;
+
+-- 소수점이하 자리에 대한 포맷이 없다면 그 값은 삭제된다.
+select to_char(2000000.45,'$009,999,999') salary from dual;
+-- 소수점 처리
+select to_char(2000000.45,'$009,999,999.99') salary from dual;
+
+-- 지역국가화폐기호 사용 ('L' 기호 사용)
+select to_char(2000000,'L9,999,999') salary from dual;
+
+-- Q] 직원테이블에 이름이 David인 이름, 성, 급여 
+--    salary1열에 15.23% 인상율은 15% 인상된 금액을
+--   다음과 같은 형식($1,466,85)을 적용된 인상금액을 salary2열에 출력하세요
+select first_name, last_name, salary, salary*0.15 salary1, 
+to_char(salary*0.1523,'$9,999.99') salary2
+from employees
+where first_name = 'David';
+
+-- 원하는 날짜 포맷으로 검색하기
+select first_name, hire_date
+from employees
+where hire_date = TO_DATE('2003/06/17','YYYY/MM/DD');
+
+-- TO_DATE : 문자를 날짜 타입으로 변경
+-- Q] 2003년6월17일에 입사한 직원이름, 입사일을 출력하세요 ('2003년6월17일'이 검색조건)
+select first_name, hire_date
+from employees
+where hire_date = TO_DATE('2003년06월17일','YYYY"년"MM"월"DD"일"');
+
+-- Q] 날짜타입이 아래와 같이 출력되도록 직원이름, 입사일을 출력하세요.
+--   '2003-06-17'
+select first_name, TO_CHAR(hire_date,'YYYY-MM-DD') as hire_date
 from employees;
--- manager_id가 114번이고 급여가 2700이상인 사원의 급여를 10% 인상해서 출력
-select salary, salary+(salary * 0.1)
-from employees
-where manager_id = 114 and salary >= 2700;
--- 부서번호가 80인 사원의 이름과 현재까지 근무한 주를 새로운열에 출력하세요
-select first_name, (sysdate-hire_date)/7 as Weeks
-from employees
-where department_id = 80;
 
-select hire_date
-from employees
-where hire_date like '05/10%';
+-- NULL 변환 .. 결측치처리
+-- NVL
+-- NVL([원본값],[null이면 변환되는 값]) <= 원본값이 null이 아니면 원본값을 반환
+select nvl(1000,100) from dual;
+select nvl(null,100) from dual;
 
--- job_id FI_ACCOUNT 이고 입사월을 기준으로 1년이 지난 년도/월/일과 , 
--- 입사월, 이름을 출력하세요
--- 그리고 입사를 먼저한 순으로 출력하세요
+select commission_pct from employees;
+select nvl(commission_pct,0) from employees;
 
--- job_id 'clerk'가 들어간 직무에 해당하는 사원의 이름, 직무id를
--- 이름순대로 출력
-select first_name, job_id
-from employees
-where job_id like '%CLERK%'
-order by first_name;
-
--- 보너스를 받지않은 사람들의 급여를 300달러 추가지급하고
--- 이름, 추가지급된급여를 출력
-select first_name,commission_pct,salary+300 as total_salary
-from employees
-where commission_pct is null
-order by total_salary desc;
-
--- 첫글자와 마지막글자빼고 * 출력 (A포함)
--- 현재기준으로 10년 일한 사원이름과 hire_date, 직무아이디를 출력하세요
-select first_name, hire_date, job_id, round((sysdate-hire_date)/365,0) as works_month
-from employees
-where (sysdate-hire_date)/365 > 10;
-
--- 핸드폰번호에서 . 을 - 변경 가운데 세자리를 *로 출력
-select replace(rpad(substr(phone_number,1,4), length(phone_number),'*'),'.','-')
+select first_name, salary, nvl(commission_pct,0) commission_pct,
+salary+(salary*(nvl(commission_pct,0))) as total_salary
 from employees;
+
+-- NVL2
+-- NVL2([원본값],[null이 아니면 변환되는 값],[null이면 변환되는 값]) 
+select nvl2(1.2, 1000*0.2, 0) from dual;
+
+select first_name, salary, nvl(commission_pct,0) commission_pct,
+nvl2(commission_pct, salary+(salary*commission_pct), salary) as total_salary
+from employees;
+
+-- COALESCE([값또는구문1],[값또는구문2] ...) : null이 아닌 첫번째 인자의 값을 선택
+-- 예) 고객데이터베이스에서 연락가능한 번호를 추출하고자 할 때
+-- 선택가능한 값 중 (휴대폰, 집전화, 회사번호) 우선순위를 정하여 
+-- 널이 아닌 값을 추출하고자 할 때 유용
+select coalesce('010-123-4567',null,null) from dual;
+select coalesce(null,'070-123-4567',null) from dual;
+select coalesce(null,null,'02-123-4567') from dual;
+
+-- Q] 위 예제를 coalesce함수를 사용해서 풀어보세요.
+select first_name, salary, nvl(commission_pct,0) commission_pct,
+coalesce(salary+(salary*commission_pct), salary) as total_salary
+from employees;
+
+-- Q] 보너스가 650달러보다 작거나 보너스가 없는 사원들에게 상품권을 지급하려고한다.
+--    해당 사원들의 이름과 보너스를 출력하세요. (coalesce 함수 사용할 것)
+--   (76개 행이 출력됨)
+select first_name,
+coalesce(salary*commission_pct,0) as bonus
+from employees
+where coalesce(salary*commission_pct,0) < 650;
+
+-- LNNVL : LNNNVL(구문) 구문의 결과가 false 또는 unknown이면 true를 반환
+-- 조건의 반대의 경우에대해 검색하고 싶을 때 활용
+select first_name,
+coalesce(salary*commission_pct,0) as bonus
+from employees
+where LNNVL(salary*commission_pct >= 650);
+
+-- DECODE : DECODE(Column or expression, search1, result
+--                                       [search2, result2, ...]
+
+-- 첫번째값과 두번째값이 같다면 세번째값을 반환해준다
+select decode('java','java','백엔드 언어') as language from dual;
+
+select decode('java','java','백엔드 언어'
+                    ,'html','프론트엔드 언어'
+                    ,'python','데이터사이언스 언어'
+                    ) as language_j from dual;
+                    
+select decode('html','java','백엔드 언어'
+                    ,'html','프론트엔드 언어'
+                    ,'python','데이터사이언스 언어'
+                    ) as language_h from dual;
+                    
+select decode('python','java','백엔드 언어'
+                    ,'html','프론트엔드 언어'
+                    ,'python','데이터사이언스 언어'
+                    ) as language_p from dual;
+
+-- 매치되는 검색문자열이 없다면 null을 반환한다
+select decode('css','java','백엔드 언어'
+                    ,'html','프론트엔드 언어'
+                    ,'python','데이터사이언스 언어'
+                    ) as language_c from dual;
+                    
+-- default값은 제일 마지막에 정의한다 (search 문자열없이)
+select decode('css','java','백엔드 언어'
+                    ,'html','프론트엔드 언어'
+                    ,'python','데이터사이언스 언어'
+                    ,'기타언어'
+                    ) as language from dual;
+                    
+-- Q] 직원테이블에서 직무 ID, 급여, 그리고 급여 인상율을 출력한다.
+--    급여인상율은 직무 id가 IT FROG, FI MGR, FI ACCOUNT에 따라 
+--    각각 10, 15, 20% 인상율을 적용한다.
+select job_id, salary,
+    decode(job_id,'IT_PROG',salary+(salary*0.1)
+                ,'FI_MGR',salary+(salary*0.15)
+                ,'FI_ACCOUNT',salary+(salary*0.2)
+                ,salary)
+                as revised_salary
+from employees;
+
+-- CASE ~ WHEN ~ THEN
+select job_id, salary,
+    case job_id when'IT_PROG' then salary+(salary*0.1)
+                when'FI_MGR' then salary+(salary*0.15)
+                when'FI_ACCOUNT' then salary+(salary*0.2)
+                else salary
+    end as revised_salary
+from employees;
+
+-- 개별조건 적용시
+select job_id, salary,
+    case when job_id = 'IT_PROG' then salary+(salary*0.1)
+         when job_id ='FI_MGR' then salary+(salary*0.15)
+         when job_id ='FI_ACCOUNT' then salary+(salary*0.2)
+         else salary
+    end as revised_salary
+from employees;
+
+-- 중첩함수 사용하기
+-- 함수1(함수2(함수3))
+-- step1
+select add_months(hire_date,6)-- 입사 후 6개월
+from employees
+order by hire_date;
+-- step2
+-- 입사 후 6개월 그 주 금요일 출력
+select next_day(add_months(hire_date,6),'금') as cal_day
+from employees
+order by hire_date;
+-- step3
+-- 입사 후 6개월 그 주 금요일의 날을 'YYYY-MM-DD' 형식으로 출력
+select to_char(next_day(add_months(hire_date,6),'금'),'YYYY-MM-DD') as cal_day
+from employees
+order by hire_date;
+
+-- Q] 직원 이름별 급여, 입사년도, 입사한 날의 요일, 급여 인상액을 출력하시오.
+--    출력포맷참고
+--    급여 인상액은 다음과 같다
+--    > 근속년도가 10년 이상이면 10%인상
+--    > 근속년도가 5년 이상이면 5%인상
+--    > 5년 미만은 인상액 없음
+select first_name, salary, 
+       to_char(hire_date,'YYYY"년" "입사"') as year,
+       to_char(hire_date,'DAY') as day,
+    case when ((sysdate-hire_date)/365) >= 10 then to_char(salary+(salary*0.1),'$999,999')
+         when ((sysdate-hire_date)/365) >= 5 then to_char(salary+(salary*0.15),'$999,999')
+         when ((sysdate-hire_date)/365) < 5 then to_char(salary+(salary*0.2),'$999,999')
+         else to_char(salary,'$999,999')
+    end as revised_salary
+from employees;
+
+-- 집합연산자
+-- UNION : 두개 이상의 질의결과를 합치는 연산 (중복되는결과를 포함)
+select employee_id, first_name
+from employees
+where hire_date like '04%'
+union
+select employee_id, first_name
+from employees
+where department_id = 20;
+
+-- UNION ALL (합집합, 중복된 값도 포함)
+select employee_id, first_name
+from employees
+where hire_date like '04%'
+union all
+select employee_id, first_name
+from employees
+where department_id = 20;
+
+-- INTERSECT (교집합)
+select employee_id, first_name
+from employees
+where hire_date like '04%'
+intersect
+select employee_id, first_name
+from employees
+where department_id = 20;
+
+-- MINUS (차집합)
+select employee_id, first_name
+from employees
+where hire_date like '04%'
+minus
+select employee_id, first_name
+from employees
+where department_id = 20;
+
+select employee_id, first_name
+from employees
+where department_id = 20
+minus
+select employee_id, first_name
+from employees
+where hire_date like '04%';
+
