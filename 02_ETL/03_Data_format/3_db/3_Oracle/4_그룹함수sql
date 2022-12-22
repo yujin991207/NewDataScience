@@ -114,6 +114,7 @@ group by grouping sets ((department_id, job_id),(job_id, manager_id))
 order by department_id, job_id, manager_id;
 
 -- ROLLUP, CUBE
+-- 1) ROLLUP
 -- 부서별, 직무별 급여의 평균과 사원의 수를 출력하세요
 -- stepl
 select department_id, job_id, round(avg(salary),2), count(*)
@@ -126,5 +127,15 @@ from employees
 -- rollup은 레벨별 집계가 가능하다. / 마지막행은 합계가 출력된다.
 group by rollup(department_id, job_id) 
 order by department_id, job_id;
+
+-- 2) CUBE : rollup의 결과에 각 열별 소계도 같이 제공
+--    => rollup과 달리 한번더 소계를 정리하여 보여준다.
+select department_id, job_id, round(avg(salary),2), count(*)
+from employees
+group by cube(department_id, job_id)
+order by department_id, job_id;
+
+
+
 
 
