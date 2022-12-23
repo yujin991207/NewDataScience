@@ -17,6 +17,7 @@
     <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/5_분석함수.sql" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/6_조인.sql" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/7_서브쿼리.sql" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/8_테이블생성_관리.sql" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/연습.sql" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/오라클_노트/05_oracle.txt" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/3_db/3_Oracle/오라클_노트/06_문자날짜함수.txt" charset="x-windows-949" />

@@ -138,22 +138,52 @@ on r.region_id = c.region_id;
 -- 업무 부담이 높은 매니져 순으로 manager_id와 담당직원수를 출력하세요.
 -- 업무 부담이 높은 매니져 순은 담당하고 있는 직원이 가장 많은 직원순입니다.
 -- (nvl,count,group by, order by 사용)
-select * from employees;
-
-select nvl(manager_id,0) as manager_id,
-count(*) as 담당직원수
-from employees
-group by nvl(manager_id,0)
-order by 담당직원수 desc;
-
--- 보너스가 2000달러보다 작거나 보너스가 없는 사원들에게 상품권을 지급하려고 합니다.
--- 보너스를 지급하는 사원들에게는 'gift card' 보너스를 지급하지 않는 사원들에게는 인상된 급여액을 표시하는 보너스 열을 추가하여
--- 보너스 값이 가장 큰 사원에게는 'best employee'로 변환해서 출력 하시오
--- 해당 사원들의 이름과 보너스를 출력하세요. (coalesce,decode 함수 사용할 것)
-
-select first_name, commission_pct*salary as bonus,
-    case when commission_pct*salary is null then to_char(commision_pct,'gift_card')
-         when commission_pct*salary < 2000 then to_char(commission_pct,'gift_card')
+select first_name,
+    case when commission_pct*salary is null then nvl(commission_pct*salary,'gift_card')
+         --when commission_pct*salary < 2000 then coalesce(commission_pct,'gift_card')
     else commission_pct
     end as bonus
 from employees;
+
+select first_name, nvl(commission_pct,'gift_card')
+from employees;
+
+select * from employees;
+
+select first_name, commission_pct*salary as bonus,
+       decode(commission_pct*salary,null,'gift_card')
+from employees;
+
+-----------------------------------------------------
+-- Q1]
+select department_id
+from
+(select department_id, stddev(salary) as stdd
+from employees
+group by department_id
+order by stdd)
+where rownum = 1;
+
+
+-- Q2]
+select a.first_name, a.manager_id, b.first_name as manager_name
+from employees a ,employees b
+where a.manager_id = b.employee_id and a.employee_id = 103;
+
+-- Q3]
+select distinct l.postal_code as 우편번호
+from employees e
+join departments d
+on e.department_id = d.department_id and e.department_id = 60
+join locations l
+on d.location_id = l.location_id and d.location_id = 1400;
+
+-- Q4]
+select first_name, salary
+from employees
+where rownum = 1
+order by salary desc;
+
+--select * from employees;
+--select * from departments;
+--select * from locations;
