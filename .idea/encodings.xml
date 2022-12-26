@@ -36,6 +36,8 @@
     <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/5_json/student_zero.json" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/5_json/student_zero2.csv" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/02_ETL/03_Data_format/5_json/student_zero2.json" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/03_RPA/01_Collection/1_openAPI/practice/지진해일_긴급대피장소_통합.csv" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/03_RPA/01_Collection/1_openAPI/코로나19관련_병원정보_응답_통합.csv" charset="x-windows-949" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

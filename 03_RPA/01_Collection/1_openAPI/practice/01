@@ -1,0 +1,5 @@
+basic URL
+http://apis.data.go.kr/1741000/TsunamiShelter3/getTsunamiShelter1List
+
+
+http://apis.data.go.kr/1741000/TsunamiShelter3/getTsunamiShelter1List?ServiceKey=xMa0cbwrTEM1UQzMljSLPYi29E5u1BLZysXwaxEgC6n44Ymoi/V86yK/giMFMiKE8zuvzHcSYFHFKOwwUy8dtw==&pageNo=1&numOfRows=10
