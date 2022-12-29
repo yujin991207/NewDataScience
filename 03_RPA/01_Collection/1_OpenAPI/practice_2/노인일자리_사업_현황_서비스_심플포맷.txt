@@ -1,0 +1,40 @@
+{
+	"getTblAgedjobStusInfo":{
+		"header":{"resultCode":"00","resultMsg":"NORMAL_CODE"},
+		"body":{
+			"items":{
+				"item":[
+						{
+						"performInst":"파랑새종합사회복지관",
+						"bsnsNm":"지역아동센터지원",
+						"bsnsKind":"사회서비스형",
+						"tel":"051-545-0115",
+						"people":"32",
+						"bsnsMainActvt":"지역아동센터 종사자 업무보조, 이용아동 급식보조 및 환경정비활동 등",
+						"bsnsSdate":"2020-02-01",
+						"bsnsFdate":"2020-12-31",
+						"gugun":"부산광역시 해운대구",
+						"dataDay":"2020-12-31"
+						},
+						
+						{
+						"performInst":"영진종합사회복지관",
+						"bsnsNm":"노노케어",
+						"bsnsKind":"공익활동",
+						"tel":"051-529-0005",
+						"people":"50",
+						"bsnsMainActvt":"취약노인가정 방문 말벗, 안부확인, 생활실태점검 등",
+						"bsnsSdate":"2020-01-01",
+						"bsnsFdate":"2020-12-31",
+						"gugun":"부산광역시 해운대구",
+						"dataDay":"2020-12-31"
+						},
+						.....
+					]
+					},
+			"numOfRows":30,
+			"pageNo":1,
+			"totalCount":628
+		}
+	}
+}

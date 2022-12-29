@@ -1,0 +1,12 @@
+http://apis.data.go.kr/6260000/BusanTblAgedjobStusService/getTblAgedjobStusInfo?serviceKey=xMa0cbwrTEM1UQzMljSLPYi29E5u1BLZysXwaxEgC6n44Ymoi/V86yK/giMFMiKE8zuvzHcSYFHFKOwwUy8dtw==&numOfRows=30&pageNo=1&resultType=JSON
+
+performInst	수행기관
+bsnsNm	사업명
+bsnsKind	사업구분
+tel	전화번호
+people	인원(명)
+bsnsMainActvt	사업주요활동내용
+bsnsSdate	사업시작일
+bsnsFdate	사업종료일
+gugun	구군명	
+dataDay	데이터기준일자
