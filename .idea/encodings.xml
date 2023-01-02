@@ -42,6 +42,10 @@
     <file url="file://$PROJECT_DIR$/03_RPA/01_Collection/1_OpenAPI/practice_1/지진해일_긴급대피장소_통합.csv" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/03_RPA/01_Collection/1_OpenAPI/practice_2/oldman_job.sql" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/03_RPA/01_Collection/1_OpenAPI/practice_2/노인일자리_사업_현황_서비스_v2.csv" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/03_RPA/01_Collection/2_Web_crawling/02_Web_Scraping/Naver_Ranking_re_v3.csv" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/03_RPA/01_Collection/2_Web_crawling/02_Web_Scraping/article_total.txt" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/03_RPA/01_Collection/2_Web_crawling/02_Web_Scraping/movie_rank_test_bs1.csv" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/03_RPA/01_Collection/2_Web_crawling/02_Web_Scraping/movie_rank_test_bs2.csv" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/03_RPA/p/air_temp.sql" charset="x-windows-949" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
