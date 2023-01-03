@@ -1,0 +1,17 @@
+create table bike_real_time(
+    대여소이름 varchar2(180),
+    거치대개수 number(10),
+    남은자전거수 number(10),
+    거치율 number(10),
+    위도 number(14,9),
+    경도 number(14,9),
+    대여소ID  varchar2(80),
+    제공시각 timestamp
+);
+
+select * from bike_real_time;
+select * from bike_real_time where 제공시각 = (select max(제공시각) from bike_real_time);
+
+drop table bike_real_time;
+
+delete from bike_real_time;

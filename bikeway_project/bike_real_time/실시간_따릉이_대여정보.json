@@ -1,0 +1,92 @@
+[
+    {
+        "parkingBikeTotCnt": "12",
+        "rackTotCnt": "15",
+        "shared": "80",
+        "stationId": "ST-4",
+        "stationLatitude": "37.55564880",
+        "stationLongitude": "126.91062927",
+        "stationName": "102. 망원역 1번출구 앞"
+    },
+    {
+        "parkingBikeTotCnt": "7",
+        "rackTotCnt": "14",
+        "shared": "50",
+        "stationId": "ST-5",
+        "stationLatitude": "37.55495071",
+        "stationLongitude": "126.91083527",
+        "stationName": "103. 망원역 2번출구 앞"
+    },
+    {
+        "parkingBikeTotCnt": "17",
+        "rackTotCnt": "13",
+        "shared": "131",
+        "stationId": "ST-6",
+        "stationLatitude": "37.55062866",
+        "stationLongitude": "126.91498566",
+        "stationName": "104. 합정역 1번출구 앞"
+    },
+    {
+        "parkingBikeTotCnt": "1",
+        "rackTotCnt": "5",
+        "shared": "20",
+        "stationId": "ST-7",
+        "stationLatitude": "37.55000687",
+        "stationLongitude": "126.91482544",
+        "stationName": "105. 합정역 5번출구 앞"
+    },
+    {
+        "parkingBikeTotCnt": "0",
+        "rackTotCnt": "12",
+        "shared": "0",
+        "stationId": "ST-8",
+        "stationLatitude": "37.54864502",
+        "stationLongitude": "126.91282654",
+        "stationName": "106. 합정역 7번출구 앞"
+    },
+    {
+        "parkingBikeTotCnt": "16",
+        "rackTotCnt": "5",
+        "shared": "320",
+        "stationId": "ST-9",
+        "stationLatitude": "37.55751038",
+        "stationLongitude": "126.91850281",
+        "stationName": "107. 신한은행 서교동지점"
+    },
+    {
+        "parkingBikeTotCnt": "9",
+        "rackTotCnt": "10",
+        "shared": "90",
+        "stationId": "ST-10",
+        "stationLatitude": "37.55274582",
+        "stationLongitude": "126.91861725",
+        "stationName": "108. 서교동 사거리"
+    },
+    {
+        "parkingBikeTotCnt": "13",
+        "rackTotCnt": "10",
+        "shared": "130",
+        "stationId": "ST-11",
+        "stationLatitude": "37.54769135",
+        "stationLongitude": "126.91998291",
+        "stationName": "109. 제일빌딩 앞"
+    },
+    {
+        "parkingBikeTotCnt": "0",
+        "rackTotCnt": "10",
+        "shared": "0",
+        "stationId": "ST-15",
+        "stationLatitude": "37.54787064",
+        "stationLongitude": "126.92353058",
+        "stationName": "111. 상수역 2번출구 앞"
+    },
+    {
+        "parkingBikeTotCnt": "3",
+        "rackTotCnt": "10",
+        "shared": "30",
+        "stationId": "ST-16",
+        "stationLatitude": "37.54920197",
+        "stationLongitude": "126.92320251",
+        "stationName": "112. 극동방송국 앞"
+    }
+]
