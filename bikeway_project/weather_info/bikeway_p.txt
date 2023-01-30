@@ -1,0 +1,33 @@
+CREATE TABLE RIDING(
+NAME VARCHAR2(100),   --라이더번호
+DISTANCE NUMBER(10,1),--거리
+CALORIE NUMBER(10,1), --칼로리 
+RIDING_DT DATE        --라이딩일자
+라이딩시간 
+);
+
+=> 운동계수 2.3 .. 보통 시간당 20km~25km
+
+분당 0.0667
+운동계수 * 체중 * (시간 * 0.0667)
+
+
+몸무게는 멤버테이블에? 어차피 조인할꺼니깐.......
+
+
+
+pd.date_range(distance_data.iloc[1,2],periods=7)
+start=distance_data.iloc[1,2]-timedelta(days=int(distance_data.iloc[1,3]))
+pd.date_range(start,periods=7)
+
+
+실시간 차트 불러오기
+cmd창에서
+
+C:\Users\TJ>d:
+D:\>cd D:\Pywork\DataScience\venv\Scripts
+D:\Pywork\DataScience\venv\Scripts>activate.bat
+(venv) D:\Pywork\DataScience\venv\Scripts>cd ../..
+(venv) D:\Pywork\DataScience>cd bikeway_project
+(venv) D:\Pywork\DataScience\bikeway_project>streamlit run a2.py
+

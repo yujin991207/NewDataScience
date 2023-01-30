@@ -10,7 +10,7 @@ http://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst?serviceKey=xMa0
 
 
 중기기온조회 : 예보구역코드, 발표시각의 조회 조건으로 예보일로부터 3일에서 10일까지 최저/최고기온정보를  조회하는 기능
-중기기온예보구역 (7일까지만)
+중기기온예보구역 (5일까지만)
 
 11B10101	서울
 11B20201	인천

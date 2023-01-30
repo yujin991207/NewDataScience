@@ -11,12 +11,13 @@ import json
 import pandas as pd
 import cx_Oracle
 from datetime import datetime
+import re
 
 now = datetime.now()
 print(now)
 
-def get_request_url():
-    getURL = 'http://openapi.seoul.go.kr:8088/595944524879756a3735434365634d/json/bikeList/1/10'
+def get_request_url(num):
+    getURL = f'http://openapi.seoul.go.kr:8088/595944524879756a3735434365634d/json/bikeList/{num}/1000'
     rentBikeStatus = requests.get(getURL)
 
     return rentBikeStatus.text
@@ -54,28 +55,53 @@ def json_to_df_info(raw_json):
                  record.get("stationId"), # 대여소id
                 ],
         )
+
     return column_list, all_data
 
+
 def preprocessed_df_to_oracle(df):
+
     con = cx_Oracle.connect('open_source/1111@localhost:1521/xe')
     cur = con.cursor()
 
     # '대여소이름', '거치대개수', '남은자전거수', '거치율', '위도', '경도', '대여소ID'
+    # sql_insert = '''
+    #             INSERT INTO BIKE_REAL_TIME VALUES(:STATIONNAME ,:RACKTOCNT ,:BIKETOCNT, :SHARED_RATE, :LATITUDE, :LONGITUDE, :STATIONID, :UPDATETIME)
+    #             '''
     sql_insert = '''
-            insert into bike_real_time values(:대여소이름,:거치대개수,:남은자전거수,:거치율,:위도,:경도,:대여소ID,:제공시각)
-            '''
+                MERGE INTO BIKE_REAL_TIME
+                USING DUAL
+                ON (STATIONNAME = :STATIONNAME)
+                WHEN NOT MATCHED THEN
+                INSERT 
+                    VALUES(:STATIONNAME2 ,:RACKTOCNT ,:BIKETOCNT, :SHARED_RATE, :LATITUDE, :LONGITUDE, :STATIONID, :UPDATETIME) 
+                WHEN MATCHED THEN
+                UPDATE SET
+                       RACKTOCNT = :RACKTOCNT2, BIKETOCNT = :BIKETOCNT2, SHARED_RATE = :SHARED_RATE2
+                 '''
     for i in range(len(df)):
-        대여소이름 = df.iloc[i]['대여소이름']
-        거치대개수 = df.iloc[i]['거치대개수']
-        남은자전거수 = df.iloc[i]['남은자전거수']
-        거치율 = df.iloc[i]['거치율']
-        위도 = df.iloc[i]['위도']
-        경도 = df.iloc[i]['경도']
-        대여소ID = df.iloc[i]['대여소ID']
-        제공시각 = df.iloc[i]['제공시각']
+        STATIONNAME = df.iloc[i]['STATIONNAME']
+        STATIONNAME2 = STATIONNAME
+
+        RACKTOCNT = df.iloc[i]['RACKTOCNT']
+        RACKTOCNT2 = RACKTOCNT
+
+        BIKETOCNT = df.iloc[i]['BIKETOCNT']
+        BIKETOCNT2 = BIKETOCNT
+
+        SHARED_RATE = df.iloc[i]['SHARED_RATE']
+        SHARED_RATE2 = SHARED_RATE
+
+        LAT = df.iloc[i]['LATITUDE']
+        LON = df.iloc[i]['LONGITUDE']
+
+        STATIONID = df.iloc[i]['STATIONID']
+
+        UPDATETIME = df.iloc[i]['UPDATETIME']
+        #UPDATETIME2 = UPDATETIME
 
         cur.execute(sql_insert,
-                    (대여소이름, 거치대개수, 남은자전거수, 거치율, 위도, 경도, 대여소ID, 제공시각)
+                    (STATIONNAME,STATIONNAME2,RACKTOCNT,BIKETOCNT,SHARED_RATE,LAT,LON,STATIONID,UPDATETIME,RACKTOCNT2,BIKETOCNT2,SHARED_RATE2)
                     )
 
     con.commit()
@@ -83,40 +109,34 @@ def preprocessed_df_to_oracle(df):
     con.close()
 
 def bike_real_time_info_collector():
-    raw_str_json = get_request_url()
+    num_list = [10,50,100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900,950,1000]
 
-    if raw_str_json:
-        raw_json = json.loads(raw_str_json)
+    for num in num_list:
+        raw_str_json = get_request_url(num)
 
-        #parsed_json = get_parse_json(raw_json)
+        if raw_str_json:
+            raw_json = json.loads(raw_str_json)
 
-    column_list, all_data = json_to_df_info(raw_json)
+        column_list, all_data = json_to_df_info(raw_json)
 
-    df = pd.DataFrame(all_data, columns = column_list)
+        df = pd.DataFrame(all_data, columns = column_list)
 
-    df = df[['stationName', 'rackTotCnt', 'parkingBikeTotCnt', 'shared', 'stationLatitude', 'stationLongitude',
-                     'stationId']]
-    df.columns = ['대여소이름', '거치대개수', '남은자전거수', '거치율', '위도', '경도', '대여소ID']
-    df['제공시각'] = df['제공시각'] = datetime.now()
+        df = df[['stationName', 'rackTotCnt', 'parkingBikeTotCnt', 'shared', 'stationLatitude', 'stationLongitude',
+                             'stationId']]
+        df.columns = ['STATIONNAME', 'RACKTOCNT', 'BIKETOCNT', 'SHARED_RATE', 'LATITUDE', 'LONGITUDE', 'STATIONID']
+        df['UPDATETIME'] = df['UPDATETIME'] = datetime.now()
 
-    preprocessed_df_to_oracle(df)
+        df['STATIONNAME'] = df['STATIONNAME'].str.replace('.','')
+        df['STATIONNAME'] = df['STATIONNAME'].str.replace('[0-9]{3,4}', '')
 
-    file_name = '실시간_따릉이_대여정보.csv'
-    df.to_csv(file_name, index=False, encoding='cp949')
 
-    #print(raw_str_json)
+        preprocessed_df_to_oracle(df)
 
-# file_name = '실시간_따릉이_대여정보.json'
-#
-# with open(file_name, 'w', encoding ='utf8') as outfile:
-#     retJson = json.dumps(parsed_json, indent = 4, sort_keys = True, ensure_ascii = False)
-#
-#     outfile.write(retJson)
-#
-# print(f'{file_name} SAVED\n')
+        file_name = '../실시간_따릉이_대여정보.csv'
+        df.to_csv(file_name, index=False, encoding='utf-8')
 
-#print(df)
-#bike_real_time_info_collector()
+        print(df)
+
 def bike_real_time_info_scheduler():
     print('실시간 따릉이 정보 스케줄러 동작.\n')
     while True:

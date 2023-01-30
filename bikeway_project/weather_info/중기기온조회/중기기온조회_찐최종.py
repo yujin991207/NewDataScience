@@ -12,23 +12,25 @@ import threading
 import time
 import requests
 import json
+import datetime
+
 import pandas as pd
 import cx_Oracle
-from datetime import datetime
 
 access_key = 'xMa0cbwrTEM1UQzMljSLPYi29E5u1BLZysXwaxEgC6n44Ymoi/V86yK/giMFMiKE8zuvzHcSYFHFKOwwUy8dtw=='
 
 # 불러올 지역 코드 => 서울, 인천, 수원
-regId_dict = {'11B10101':'서울','11B20201':'인천','11B20601':'수원'}
+regId_dict = {'11B10101':'서울'}
 
-def get_request_url(regId):
+def get_request_url(regId,yyyymmdd):
     url = 'http://apis.data.go.kr/1360000/MidFcstInfoService/getMidTa'
     params = {'serviceKey' : access_key,
               'numOfRows' : 10,
               'pageNo' : 1,
               'dataType' : 'JSON',
               'regId' : regId,
-              'tmFc' : '202301030600'
+              'tmFc' : yyyymmdd
+
     }
     response = requests.get(url, params = params)
 
@@ -103,144 +105,112 @@ def get_parse_json(raw_json):
         )
     return all_data
 
-def json_to_df_info(raw_json):
+def json_to_df_info(raw_json,regId):
     all_data = []
     column_list = [
-                    "regId",
-                    "taMin3",
-                    "taMax3",
-                    "taMax3Low",
-                    "taMax3High",
-                    "taMin4",
-                    "taMin4Low",
-                    "taMin4High",
-                    "taMax4",
-                    "taMax4Low",
-                    "taMax4High",
-                    "taMin5",
-                    "taMin5Low",
-                    "taMin5High",
-                    "taMax5",
-                    "taMax5Low",
-                    "taMax5High",
-                    "taMin6",
-                    "taMin6Low",
-                    "taMin6High",
-                    "taMax6",
-                    "taMax6Low",
-                    "taMax6High",
-                    "taMin7",
-                    "taMin7Low",
-                    "taMin7High",
-                    "taMax7",
-                    "taMax7Low",
-                    "taMax7High",
-                    "taMin8",
-                    "taMin8Low",
-                    "taMin8High",
-                    "taMax8",
-                    "taMax8Low",
-                    "taMax8High",
-                    "taMin9",
-                    "taMin9Low",
-                    "taMin9High",
-                    "taMax9",
-                    "taMax9Low",
-                    "taMax9High",
-                    "taMin10",
-                    "taMin10Low",
-                    "taMin10High",
-                    "taMax10",
-                    "taMax10Low",
-                    "taMax10High"
+                    "taMin3","taMax3",
+                    "taMin4","taMax4",
+                    "taMin5","taMax5",
+                    "taMin6","taMax6",
+                    "taMin7","taMax7"
                     ]
 
     for record in raw_json['response']['body']['items']['item']:
-        all_data.append(
-                [
-                    record.get("regId"),
 
-                    record.get("taMin3"),
-                    record.get("taMin3Low"),
-                    record.get("taMin3High"),
-                    record.get("taMax3"),
-                    record.get("taMax3Low"),
-                    record.get("taMax3High"),
+        row_data = []
+        row_data.append(regId_dict[regId])
+        # print(row_data)
 
-                    record.get("taMin4"),
-                    record.get("taMin4Low"),
-                    record.get("taMin4High"),
-                    record.get("taMax4"),
-                    record.get("taMax4Low"),
-                    record.get("taMax4High"),
+        for column in column_list:
+            row_data.append(record.get(column))
+    all_data.append(row_data)
 
-                    record.get("taMin5"),
-                    record.get("taMin5Low"),
-                    record.get("taMin5High"),
-                    record.get("taMax5"),
-                    record.get("taMax5Low"),
-                    record.get("taMax5High"),
-
-                    record.get("taMin6"),
-                    record.get("taMin6Low"),
-                    record.get("taMin6High"),
-                    record.get("taMax6"),
-                    record.get("taMax6Low"),
-                    record.get("taMax6High"),
-
-                    record.get("taMin7"),
-                    record.get("taMin7Low"),
-                    record.get("taMin7High"),
-                    record.get("taMax7"),
-                    record.get("taMax7Low"),
-                    record.get("taMax7High"),
-
-                    record.get("taMin8"),
-                    record.get("taMin8Low"),
-                    record.get("taMin8High"),
-                    record.get("taMax8"),
-                    record.get("taMax8Low"),
-                    record.get("taMax8High"),
-
-                    record.get("taMin9"),
-                    record.get("taMin9Low"),
-                    record.get("taMin9High"),
-                    record.get("taMax9"),
-                    record.get("taMax9Low"),
-                    record.get("taMax9High"),
-
-                    record.get("taMin10"),
-                    record.get("taMin10Low"),
-                    record.get("taMin10High"),
-                    record.get("taMax10"),
-                    record.get("taMax10Low"),
-                    record.get("taMax10High")
-                ]
-        )
+    column_list = ['AREANAME', 'LOWTEMP_1', 'HIGHTEMP_1','LOWTEMP_2','HIGHTEMP_2','LOWTEMP_3','HIGHTEMP_3','LOWTEMP_4','HIGHTEMP_4',
+                   'LOWTEMP_5','HIGHTEMP_5']
     return column_list, all_data
 
-def weather_temp_info_collector() :
-    # today = datetime.today().strftime('$Y$m$d')
+def preprocessed_df_to_oracle(df):
 
-    for regId in regId_dict:
-        raw_str_json = get_request_url(regId)
+    con = cx_Oracle.connect('bike/12345@192.168.0.78:1521/xe')
+    cur = con.cursor()
+    sql_insert = '''
+            insert into weather_temp(AREANAME,LOWTEMP_1,HIGHTEMP_1,LOWTEMP_2,HIGHTEMP_2,LOWTEMP_3,HIGHTEMP_3,
+            LOWTEMP_4,HIGHTEMP_4,LOWTEMP_5,HIGHTEMP_5,UPDATETIME) 
+            values(:AREANAME,:LOWTEMP_1,:HIGHTEMP_1,:LOWTEMP_2,:HIGHTEMP_2,:LOWTEMP_3,:HIGHTEMP_3,
+            :LOWTEMP_4,:HIGHTEMP_4,:LOWTEMP_5,:HIGHTEMP_5,:UPDATETIME)
+            '''
+    for i in range(len(df)):
+        AREANAME = df.iloc[i]['AREANAME']
+
+        LOWTEMP_1 = int(df.iloc[i]['LOWTEMP_1'])
+        HIGHTEMP_1 = int(df.iloc[i]['HIGHTEMP_1'])
+
+        LOWTEMP_2 = int(df.iloc[i]['LOWTEMP_2'])
+        HIGHTEMP_2 = int(df.iloc[i]['HIGHTEMP_2'])
+
+        LOWTEMP_3 = int(df.iloc[i]['LOWTEMP_3'])
+        HIGHTEMP_3 = int(df.iloc[i]['HIGHTEMP_3'])
+
+        LOWTEMP_4 = int(df.iloc[i]['LOWTEMP_4'])
+        HIGHTEMP_4 = int(df.iloc[i]['HIGHTEMP_4'])
+
+        LOWTEMP_5 = int(df.iloc[i]['LOWTEMP_5'])
+        HIGHTEMP_5 = int(df.iloc[i]['HIGHTEMP_5'])
+
+        UPDATETIME = df.iloc[i]['UPDATETIME']
+
+
+        cur.execute(sql_insert,
+                    (AREANAME,LOWTEMP_1,HIGHTEMP_1,LOWTEMP_2,HIGHTEMP_2,LOWTEMP_3,HIGHTEMP_3,LOWTEMP_4,HIGHTEMP_4,
+                   LOWTEMP_5,HIGHTEMP_5,UPDATETIME)
+                    )
+
+    con.commit()
+    cur.close()
+    con.close()
+
+def get_update_time_info():
+    now = datetime.datetime.now()
+
+    if now.hour < 18 and now.hour > 0:
+        time = datetime.time(6,00,00)
+        update_time = datetime.datetime.combine(now,time)
+
+        print(f'시간 업데이트합니다.{update_time}')
+    else:
+        time = datetime.time(18,00,00)
+        update_time = datetime.datetime.combine(now, time)
+
+        print(f'시간 업데이트합니다.{update_time}')
+
+    return update_time
+
+def weather_temp_info_collector():
+
+    update_time = get_update_time_info()
+    yyyymmdd = update_time.strftime("%Y%m%d%H%M")
+
+    for regId in regId_dict: # 지역코드 for문
+        raw_str_json = get_request_url(regId,yyyymmdd)
 
         if raw_str_json:
             raw_json = json.loads(raw_str_json)
             # json.loads() 문자열 json을 실제 json(dict)타입으로 변환
 
-        parsed_json = get_parse_json(raw_json)
+        #parsed_json = get_parse_json(raw_json)
 
         #print(raw_str_json)
 
         #print(raw_json)
-        column_list, all_data = json_to_df_info(raw_json)
+        column_list, all_data = json_to_df_info(raw_json,regId)
 
         df = pd.DataFrame(all_data, columns = column_list)
+        df['UPDATETIME'] = df['UPDATETIME'] = datetime.datetime.now()
         print(df)
+        preprocessed_df_to_oracle(df)
 
-# file_name = '중기기온조회_수도권.csv'
-# df.to_csv(file_name, index = False)
+    # file_name = '중기기온조회_수도권.csv'
+    # df.to_csv(file_name, index = False)
 
 #file_name = '중기기온조회_수도권.json'
 #
@@ -250,6 +220,34 @@ def weather_temp_info_collector() :
 #     outfile.write(retJson)
 #
 # print(f'{file_name} SAVED\n')
-weather_temp = weather_temp_info_collector()
+def weather_temp_info_scheduler():
+    print('주간날씨기온정보 수집기 스케줄러 동작.\n')
+    while True:
+        weather_temp_info_collector()
+        print("수집완료.")
+        time.sleep(86500)
 
-print(weather_temp)
+def print_main_menu():
+    print('\n1. 주간날씨 기온데이터 실시간 데이터 구축')
+    print('2. 스케줄러 종료')
+    print('* 엔터: 메뉴 업데이트\n')
+
+while True:
+    print_main_menu()
+    print('아래행에 메뉴입력: ')
+    selection = input()
+    if selection == '':
+        continue
+    else:
+        menu_num = int(selection)
+
+    if(menu_num == 1):
+        date = get_update_time_info()
+        t = threading.Thread(target=weather_temp_info_scheduler(), daemon=True)
+        t.start()
+    elif(menu_num == 2):
+        break
+    elif (menu_num == 0):
+        continue
+
+
